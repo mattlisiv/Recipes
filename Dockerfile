@@ -6,3 +6,6 @@ RUN apt-get install -y python3-pip
 RUN python3 -V
 #Install Rethink Python Driver
 RUN pip3 install rethinkdb
+
+EXPOSE 8080 8080
+EXPOSE 28015 28015
