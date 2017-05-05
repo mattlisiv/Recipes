@@ -28,10 +28,10 @@ node {
             default:
                 // Create namespace if it doesn't exist
                 sh("kubectl get ns ${branch} || kubectl create ns ${branch}")
-                // Don't use public load balancing for development branches
-                sh("sed -i.bak 's#LoadBalancer#ClusterIP#' ./k8s/production/production.yaml")
                 sh("sed -i.bak 's#gcr.io/${project}/${appName}:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
+                sh("kubectl --namespace=production apply -f k8s/services/")
                 sh("kubectl --namespace=${branch} apply -f k8s/production/")
+                sh("echo http://`kubectl --namespace=production get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
                 echo 'To access your environment run `kubectl proxy`'
                 echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${branch}/services/${feSvcName}:80/"
           }
