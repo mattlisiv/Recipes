@@ -3,6 +3,7 @@ node {
      def project = 'kubernetes-jenkins-ci'
      def appName = 'rethinkdb'
      def feSvcName = "${appName}"
+     def branch = env.BRANCH_NAME
      def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
     //Checkout Code
@@ -26,14 +27,14 @@ node {
          // Roll out a dev environment
             default:
                 // Create namespace if it doesn't exist
-                sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
+                sh("kubectl get ns ${branch} || kubectl create ns ${branch}")
                 // Don't use public load balancing for development branches
                 sh("sed -i.bak 's#LoadBalancer#ClusterIP#' ./k8s/services/frontend.yaml")
                 sh("sed -i.bak 's#gcr.io/${project}/${appName}:1.0.0#${imageTag}#' ./k8s/dev/*.yaml")
-                sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/services/")
-                sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/dev/")
+                sh("kubectl --namespace=${branch} apply -f k8s/services/")
+                sh("kubectl --namespace=${branch} apply -f k8s/dev/")
                 echo 'To access your environment run `kubectl proxy`'
-                echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${feSvcName}:80/"
+                echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${branch}/services/${feSvcName}:80/"
           }
 
     }
