@@ -36,6 +36,7 @@ spec:
   port:
   - name: rethink
     port: 28015
+    targetPort: 28015
     protocol: TCP
   selector:
     app: rethinkdb
