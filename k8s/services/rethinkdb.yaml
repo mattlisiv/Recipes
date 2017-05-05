@@ -33,7 +33,7 @@ metadata:
   name: rethinkdb
 spec:
   type: NodePort
-  port:
+  ports:
   - name: rethink
     port: 28015
     targetPort: 28015
