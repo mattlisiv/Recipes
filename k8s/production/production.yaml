@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: rethink
-        image: gcr.io/kubernetes-jenkins-ci/rethink:1.0.0
+        image: gcr.io/kubernetes-jenkins-ci/rethinkdb:1.0.0
         resources:
           limits:
             memory: "500Mi"
