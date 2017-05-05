@@ -4,7 +4,7 @@ node {
      def appName = 'rethinkdb'
      def feSvcName = "${appName}"
      def branch = env.BRANCH_NAME
-     def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+     def imageTag = "gcr.io/${project}/${appName}:${appName}.1.0.0"
 
     //Checkout Code
     checkout scm
