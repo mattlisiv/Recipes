@@ -12,31 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-kind: Service
-apiVersion: v1
+apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
   name: rethinkdb
+  namespace: null
 spec:
-  type: NodePort
-  ports:
-  - name: admin
-    port: 8080
-    targetPort: 8080
-    protocol: TCP
-  selector:
-    app: rethinkdb
-    role: frontend
-----
-kind: Service
-apiVersion: v1
-metadata:
-  name: rethinkdb
-spec:
-  type: NodePort
-  port:
-  - name: rethink
-    port: 28015
-    protocol: TCP
-  selector:
-    app: rethinkdb
-    role: rethink
+  tls:
+  - secretName: tls
+  backend:
+    serviceName: rethinkdb
+    servicePort: 8080
