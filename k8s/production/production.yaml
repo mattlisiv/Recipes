@@ -20,10 +20,10 @@ spec:
   replicas: 1
   template:
     metadata:
-      name: rethink
+      name: rethinkdb
       labels:
-        app: rethink
-        role: rethink
+        app: rethinkdb
+        role: rethinkdb
         env: production
     spec:
       containers:

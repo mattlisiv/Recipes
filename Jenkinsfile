@@ -31,7 +31,7 @@ node {
                 sh("sed -i.bak 's#gcr.io/${project}/${appName}:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
                 sh("kubectl --namespace=${branch} apply -f k8s/services/")
                 sh("kubectl --namespace=${branch} apply -f k8s/production/")
-                sh("echo http://`kubectl --namespace=production get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+                sh("echo http://`kubectl --namespace=${branch} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
                 echo 'To access your environment run `kubectl proxy`'
                 echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${branch}/services/${feSvcName}:80/"
           }
