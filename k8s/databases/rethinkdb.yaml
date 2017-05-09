@@ -1,23 +1,23 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  # Pod Definition
+  # [Pod Definition]
   name: rethinkdb-pod
   namespace: rethinkdb
-  # Labels Definition
+  # [Labels Definition]
   labels:
     purpose: cluster
 spec:
-  #Containers Definition
+  # [Containers Definition]
   containers:
-    # Image Definition
+    # [Image Definition]
   - name: lates
     image: rethinkdb
-    # Networking Definition
+    # [Networking Definition]
     ports:
     - containerPort: 8080
     - containerPort: 28015
-    # Health Check
+    # [Health Check]
     readinessProbe:
       httpGet:
         path: /
@@ -26,11 +26,11 @@ spec:
       timeoutSeconds: 5
       successThreshold: 2
       failureThreshold: 5
-    # Memory/Volume Definition
+    # [Memory/Volume Definition]
     volumeMounts:
     - name: rethinkdb-storage
       mountPath: /data/rethink_data
-  # Volumes Definition
+  # [Volumes Definition]
   volumes:
   - name: rethinkdb-storage
     gcePersistentDisk:
