@@ -14,18 +14,3 @@ spec:
       targetPort: 8080
       name: ui
 # [END rethinkdb client]
-# [START rethinkdb_connection]
-apiVersion: v1
-kind: Service
-metadata:
-  name: rethinkdb-connection
-  namespace: rethinkdb
-spec:
-  selector:
-    app: rethinkdb
-  ports:
-    - protocol: TCP
-      port: 28015
-      targetPort: 28015
-      name: connection
-# [END rethinkdb_connection]
