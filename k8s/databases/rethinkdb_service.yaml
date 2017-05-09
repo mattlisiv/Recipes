@@ -1,6 +1,6 @@
 # [START rethinkdb client]
+apiVersion: v1
 kind: Service
-  apiVersion: v1
   metadata:
     name: rethinkdb-ui
     namespace: rethinkdb
@@ -15,9 +15,8 @@ kind: Service
         name: ui
 # [END rethinkdb client]
 # [START rethinkdb_connection]
----
+apiVersion: v1
 kind: Service
-  apiVersion: v1
   metadata:
     name: rethinkdb-connection
     namespace: rethinkdb
