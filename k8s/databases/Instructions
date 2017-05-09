@@ -6,4 +6,9 @@ kubectl create ns rethinkdb
 
 gcloud compute disks create --size=200GB --zone=us-east-a rethinkdb-storage-disk
 
+kubectl create -f databases
+
+kubectl get pods --namespace=rethinkdb
+kubectl get svc --namespace=rethinkdb
+
 

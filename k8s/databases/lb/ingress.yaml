@@ -1,0 +1,12 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rethinkdb
+  namespace: rethinkdb
+spec:
+  tls:
+  - secretName: tls
+  backend:
+    serviceName: rethinkdb-ui
+    servicePort: 8080
