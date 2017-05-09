@@ -1,0 +1,9 @@
+//Kubernetes Installation
+
+kubectl create ns rethinkdb
+
+//@@ Look out for hardcoded project name below
+
+gcloud compute disks create --size=200GB --zone=us-east-a rethinkdb-storage-disk
+
+

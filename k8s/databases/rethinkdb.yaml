@@ -33,4 +33,6 @@ spec:
   # Volumes Definition
   volumes:
   - name: rethinkdb-storage
-    emptyDir: {}
+    gcePersistentDisk:
+          pdName: rethinkdb-storage-disk
+          fsType: ext4
