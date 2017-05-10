@@ -24,7 +24,7 @@ spec:
         port: 8080
       periodSeconds: 10
       timeoutSeconds: 5
-      successThreshold: 2
+      successThreshold: 1
       failureThreshold: 5
     # [Memory/Volume Definition]
     volumeMounts:
