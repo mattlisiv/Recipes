@@ -1,5 +1,5 @@
-apiVersion: v1
-kind: Pod
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   # [Pod Definition]
   name: rethinkdb-pod
@@ -8,31 +8,36 @@ metadata:
   labels:
     purpose: cluster
 spec:
-  # [Containers Definition]
-  containers:
-    # [Image Definition]
-  - name: latest
-    image: rethinkdb
-    # [Networking Definition]
-    ports:
-    - containerPort: 8080
-    - containerPort: 28015
-    # [Health Check]
-    livenessProbe:
-      httpGet:
-        path: /
-        port: 8080
-      periodSeconds: 10
-      timeoutSeconds: 5
-      successThreshold: 1
-      failureThreshold: 5
-    # [Memory/Volume Definition]
-    volumeMounts:
-    - name: rethinkdb-storage
-      mountPath: /data/rethink_data
-  # [Volumes Definition]
-  volumes:
-  - name: rethinkdb-storage
-    gcePersistentDisk:
-          pdName: rethinkdb-storage-disk
-          fsType: ext4
+  replicas: 1
+  template:
+    metadata:
+      app: rethinkdb
+    spec:
+      # [Containers Definition]
+      containers:
+        # [Image Definition]
+      - name: latest
+        image: rethinkdb
+        # [Networking Definition]
+        ports:
+        - containerPort: 8080
+        - containerPort: 28015
+        # [Health Check]
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        # [Memory/Volume Definition]
+        volumeMounts:
+        - name: rethinkdb-storage
+          mountPath: /data/rethink_data
+      # [Volumes Definition]
+      volumes:
+      - name: rethinkdb-storage
+        gcePersistentDisk:
+              pdName: rethinkdb-storage-disk
+              fsType: ext4
