@@ -11,14 +11,14 @@ spec:
   # [Containers Definition]
   containers:
     # [Image Definition]
-  - name: lates
+  - name: latest
     image: rethinkdb
     # [Networking Definition]
     ports:
     - containerPort: 8080
     - containerPort: 28015
     # [Health Check]
-    readinessProbe:
+    livenessProbe:
       httpGet:
         path: /
         port: 8080

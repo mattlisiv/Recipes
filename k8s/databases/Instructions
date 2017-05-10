@@ -11,4 +11,7 @@ kubectl create -f databases
 kubectl get pods --namespace=rethinkdb
 kubectl get svc --namespace=rethinkdb
 
-
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /tmp/tls.crt -subj "/CN
+=rethinkdb/O=rethinkdb"
+kubectl create secret generic tls --from-file=/tmp/tls.crt --from-file=/tmp/tls.key --namespace rethi
+nkdb

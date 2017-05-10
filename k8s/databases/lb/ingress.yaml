@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: rethinkdb
+  name: rethinkdb-ui
   namespace: rethinkdb
 spec:
   tls:
