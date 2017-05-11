@@ -10,7 +10,7 @@ node {
     checkout scm
 
     sh("kubectl create -f databases/rethinkdb")
-                sh("kubectl create -f databases/rethinkdb/lb")
+                sh("kubectl create -f k8s/databases/rethinkdb/lb")
 
     }
 
