@@ -2,15 +2,17 @@
 
 kubectl create ns rethinkdb
 
-//@@ Look out for hardcoded project name below
+//@@ Look out for hardcoded storage name below
 
 gcloud compute disks create --size=200GB --zone=us-east-a rethinkdb-storage-disk
 
-kubectl create -f databases
+kubectl create -f databases/rethinkdb
 
+//Looks at kubernetes Service
 kubectl get pods --namespace=rethinkdb
 kubectl get svc --namespace=rethinkdb
 
+//Create SSL
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /tmp/tls.crt -subj "/CN
 =rethinkdb/O=rethinkdb"
 kubectl create secret generic tls --from-file=/tmp/tls.crt --from-file=/tmp/tls.key --namespace rethi
