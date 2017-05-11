@@ -10,8 +10,9 @@ node{
     stage("Checkout Code")
     checkout scm
     stage("Deploy Kubernetes Cluster")
-    sh("kubectl create -f k8s/databases/rethinkdb --namespace=rethinkdb")
-    sh("kubectl create -f k8s/databases/rethinkdb/lb --namespace=rethinkdb")
+    sh("kubectl create namespace my-namespace")
+    sh("kubectl create -f k8s/databases/rethinkdb")
+    sh("kubectl create -f k8s/databases/rethinkdb/lb")
 
     }
 
