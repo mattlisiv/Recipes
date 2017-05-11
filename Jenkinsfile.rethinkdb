@@ -1,16 +1,17 @@
-node {
-     //Define Project
-     def project = 'kubernetes-jenkins-ci'
-     def appName = 'rethinkdb'
-     def feSvcName = "${appName}"
-     def branch = env.BRANCH_NAME
-     def imageTag = "gcr.io/${project}/${appName}:1.0.0"
+node{
 
-    //Checkout Code
+    stage("Define Project")
+    def project = 'kubernetes-jenkins-ci'
+    def appName = 'rethinkdb'
+    def feSvcName = "${appName}"
+    def branch = env.BRANCH_NAME
+    def imageTag = "gcr.io/${project}/${appName}:1.0.0"
+
+    stage("Checkout Code")
     checkout scm
-
-    sh("kubectl create -f databases/rethinkdb")
-                sh("kubectl create -f k8s/databases/rethinkdb/lb")
+    stage("Deploy Kubernetes Cluster")
+    sh("kubectl create -f k8s/databases/rethinkdb")
+    sh("kubectl create -f k8s/databases/rethinkdb/lb")
 
     }
 
